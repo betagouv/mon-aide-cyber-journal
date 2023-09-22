@@ -30,3 +30,18 @@ $ docker compose up mac-journal-db
 $ docker compose exec mac-journal-db createdb -U postgres mac-journal
 $ docker compose exec mac-journal-db createuser -U postgres metabase
 ```
+
+Créer un fichier `.env` en copiant fichier `.env.template` puis valoriser chaque variable du `.env`.
+
+Mettre à niveau le schéma de la base de données, via [`knex.js`](https://knexjs.org/) qui s'exécute dans le conteneur `node`.
+
+```sh
+$ docker compose up node
+```
+
+Donner les droits en lecture sur les éléments créés à l'utilisateur `metabase`.
+
+```sh
+$ docker compose exec mac-journal-db psql -U postgres -d mac-journal -c 'GRANT USAGE ON SCHEMA journal_mac TO metabase;'
+$ docker compose exec mac-journal-db psql -U postgres -d mac-journal -c 'GRANT SELECT ON ALL TABLES IN SCHEMA journal_mac TO metabase;'
+```

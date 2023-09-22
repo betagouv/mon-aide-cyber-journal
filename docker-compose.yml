@@ -23,3 +23,12 @@ services:
       - "3005:3000"
     depends_on:
       - mac-journal-db
+
+  node:
+    image: node:18.12.1 # Version LTS
+    volumes:
+      - ./:/home/node/app
+    working_dir: /home/node/app
+    command: "./scripts/migrations.sh"
+    depends_on:
+      - mac-journal-db
