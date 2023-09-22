@@ -1,1 +1,32 @@
-# mon-aide-cyber-journal
+# MonAideCyber Journal
+
+# Journal de MonAideCyber
+
+Ce dépôt Git représente le journal des événements métiers
+survenus dans [MonAideCyber](https://github.com/betagouv/mon-aide-cyber).
+
+Ces événements métiers ont vocation à être utilisés par la
+partie _reporting_ de MonAideCyber.
+
+C'est [Metabase](https://www.metabase.com/), hébergé chez Scalingo, qui a été choisi
+comme outil de _reporting_.
+
+## Configuration de l'environnement de développement
+
+Il est nécessaire en prérequis d'avoir installé [Git](https://git-scm.com/),
+[Docker Engine](https://docs.docker.com/get-docker/) et [Docker Compose](https://docs.docker.com/compose/install/).
+
+Commencer par récupérer les sources du projet et aller dans le répertoire créé.
+
+```sh
+$ git clone git@github.com:betagouv/mon-aide-cyber-journal.git && cd mon-service-aide-journal
+```
+
+Créer la base de données `mac-journal` et un utilisateur `metabase`
+qui sera utilisé par Metabase.
+
+```sh
+$ docker compose up mac-journal-db
+$ docker compose exec mac-journal-db createdb -U postgres mac-journal
+$ docker compose exec mac-journal-db createuser -U postgres metabase
+```
