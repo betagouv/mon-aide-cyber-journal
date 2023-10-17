@@ -9,6 +9,8 @@ services:
       - "5432:5432"
     volumes:
       - /var/lib/postgresql/data
+    networks:
+      - reseau-mon-aide-cyber
 
   metabase:
     image: metabase/metabase
@@ -23,6 +25,8 @@ services:
       - "3005:3000"
     depends_on:
       - mac-journal-db
+    networks:
+      - reseau-mon-aide-cyber
 
   node:
     image: node:18.12.1 # Version LTS
@@ -32,3 +36,9 @@ services:
     command: "./scripts/migrations.sh"
     depends_on:
       - mac-journal-db
+    networks:
+      - reseau-mon-aide-cyber
+
+networks:
+  reseau-mon-aide-cyber:
+    external: true
