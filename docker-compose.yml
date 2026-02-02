@@ -2,13 +2,14 @@ version: '3'
 
 services:
   mac-journal-db:
-    image: postgres
+    image: docker.io/postgres:14
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - "5432:5432"
     volumes:
       - /var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
     networks:
       - reseau-mon-aide-cyber
 
