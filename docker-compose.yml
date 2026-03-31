@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mac-journal-db:
-    image: postgres
+    image: docker.io/postgres
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
@@ -13,7 +13,7 @@ services:
       - reseau-mon-aide-cyber
 
   metabase:
-    image: metabase/metabase
+    image: docker.io/metabase/metabase
     environment:
       - MB_DB_TYPE=postgres
       - MB_DB_DBNAME=mac-journal
@@ -29,7 +29,7 @@ services:
       - reseau-mon-aide-cyber
 
   node:
-    image: node:18.12.1 # Version LTS
+    image: docker.io/node:18.12.1 # Version LTS
     volumes:
       - ./:/home/node/app
     working_dir: /home/node/app
