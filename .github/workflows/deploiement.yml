@@ -52,5 +52,7 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          NODE_VERSION="$(./scripts/get-node-version.sh)"
           clever link "$ID_APP"
+          clever env set CC_NODE_VERSION "$NODE_VERSION"
           clever deploy --force --same-commit-policy=rebuild
