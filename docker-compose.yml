@@ -29,7 +29,7 @@ services:
       - reseau-mon-aide-cyber
 
   node:
-    image: docker.io/node:18.12.1 # Version LTS
+    image: docker.io/node:${NODE_VERSION:-latest}
     volumes:
       - ./:/home/node/app
     working_dir: /home/node/app
